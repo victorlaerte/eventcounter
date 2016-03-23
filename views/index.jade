@@ -4,56 +4,103 @@ block content
     h1= title
     p Bem Vindo ao Event Counter
 
-    // Wrapper
-    #wrapper
+    div(ng-controller="eventCounterCtrl")
 
-        // CURRENT EVENT LIST
-        h2 Eventos Hoje
-        #userList
-            table
-                thead
-                    th Nome do Evento
-                    th Local
-                    th Data
-                    th Hora
-                    th Quantidade de Pessoas
-                tbody
-        // /CURRENT EVENT LIST
+        // Wrapper
+        #wrapper
 
-    // /WRAPPER
+            // EVENT INFO
+            #eventInfo(ng-hide="selectedEvent === undefined")
+                hide Event Info
+                p
+                    strong Nome:
+                    |  <span>{{selectedEvent.name}}</span>
+                    br
+                    strong Local:
+                    |  <span>{{selectedEvent.location}}</span>
+                    br
+                    strong Data:
+                    |  <span>{{selectedEvent.startDate}}</span>
+                    br
+                    strong Hora:
+                    |  <span>{{selectedEvent.startTime}}</span>
+                    br
+                    strong Quantidade de Pessoas:
+                    |  <span>{{selectedEvent.counter}}</span>
+            // /EVENT INFO
 
-    // Wrapper
-    #wrapper
+            // CURRENT EVENT LIST
+            h2 Eventos Hoje
+            #eventList
+                table
+                    thead
+                        th Nome do Evento
+                        th Local
+                        th Data
+                        th Hora
+                        th Quantidade de Pessoas
+                    tbody
+                    tr(ng-repeat="event in todayEventList")
+                        td 
+                            a(href="")(ng-click="showEventInfo(event)") {{event.name}}
+                        td {{event.location}}
+                        td {{event.startDate}}
+                        td {{event.startTime}}
+                        td {{event.counter}}
 
-        // NEXT EVENT LIST
-        h2 Eventos Futuros
-        #userList
-            table
-                thead
-                    th Nome do Evento
-                    th Local
-                    th Data
-                    th Hora
-                tbody
-        // /NEXT EVENT LIST
+            // /CURRENT EVENT LIST
 
-    // /WRAPPER
+        // /WRAPPER
+
+        // Wrapper
+        #wrapper
+
+            // NEXT EVENT LIST
+            h2 Eventos Futuros
+            #eventList
+                table
+                    thead
+                        th Nome do Evento
+                        th Local
+                        th Data
+                        th Hora
+                        th Quantidade de Pessoas
+                    tbody
+                    tr(ng-repeat="event in nextEventList")
+                        td
+                            a(href="")(ng-click="showEventInfo(event)") {{event.name}}
+                        td {{event.location}}
+                        td {{event.startDate}}
+                        td {{event.startTime}}
+                        td {{event.counter}}
+
+            // /NEXT EVENT LIST
+
+        // /WRAPPER
 
 
-    // Wrapper
-    #wrapper
+        // Wrapper
+        #wrapper
 
-        // PAST EVENT LIST
-        h2 Eventos Passados
-        #userList
-            table
-                thead
-                    th Nome do Evento
-                    th Local
-                    th Data
-                    th Hora
-                    th Quantidade de Pessoas
-                tbody
-        // /PAST EVENT LIST
+            // PAST EVENT LIST
+            h2 Eventos Passados
+            #eventList
+                table
+                    thead
+                        th Nome do Evento
+                        th Local
+                        th Data
+                        th Hora
+                        th Quantidade de Pessoas
+                    tbody
+                    tr(ng-repeat="event in pastEventList")
+                        td
+                            a(href="")(ng-click="showEventInfo(event)") {{event.name}}
+                        td {{event.location}}
+                        td {{event.startDate}}
+                        td {{event.startTime}}
+                        td {{event.counter}}
 
-    // /WRAPPER
+            // /PAST EVENT LIST
+
+        // /WRAPPER
