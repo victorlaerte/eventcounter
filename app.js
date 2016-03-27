@@ -11,6 +11,7 @@ var db = monk('localhost:27017/eventcounter');
 
 var routes = require('./routes/index');
 var partials = require('./routes/partials');
+var directives = require('./routes/directives');
 var events = require('./routes/api/events');
 
 var app = express();
@@ -35,6 +36,7 @@ app.use(function(req, res, next){
 
 app.use('/', routes);
 app.use('/partials', partials);
+app.use('/directives', directives);
 app.use('/api/events', events);
 
 // catch 404 and forward to error handler

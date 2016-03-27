@@ -54,10 +54,22 @@
         };
     };
 
+    var EventDatatableDirective = function() {
+        return {
+            restrict : 'E',
+            scope : {
+                title : '@',
+                events : '='
+            },
+            templateUrl : '/directives/event-datatable'
+        };
+    };
+
     angular.module('eventCounter', ['ngAnimate', 'ngRoute', 'ui.bootstrap'])
         .config(['$routeProvider', Config])
         .controller('HomeCtrl', ['$scope', '$http', HomeCtrl])
         .controller('ShowEventCtrl', ['$scope', '$http', '$routeParams', ShowEventCtrl])
         .controller('AddEventCtrl', ['$scope', '$http', '$location', AddEventCtrl])
+        .directive('eventDatatable', EventDatatableDirective)
     ;
 })();
