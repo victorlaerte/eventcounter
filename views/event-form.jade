@@ -1,6 +1,6 @@
 
 #addEvent
-    h2 Add Event
+    h2 Novo Evento
     fieldset(style='max-width:650px')
         div.row
             div.col-sm-12
@@ -28,6 +28,9 @@
             div.col-sm-2(style='width:105px;padding-left:20px') termina às
             div.col-sm-2(style='padding-left:0;')
                 uib-timepicker(ng-model='eventToAdd.finishTime', show-meridian='false')
+        div.row.form-group
+            div.col-sm-12
+                textarea.form-control(ng-model='eventToAdd.note', placeholder='Observação')
         div.row.form-group
             div.col-sm-12
                 button#btnSendEventRequest.btn.btn-primary(ng-click='sendEventRequest()') Enviar Pedido de Cadastro
