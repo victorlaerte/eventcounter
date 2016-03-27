@@ -32,7 +32,7 @@ block content
             // CURRENT EVENT LIST
             h2 Eventos Hoje
             #eventList
-                table
+                table.table.table-striped.table-hover
                     thead
                         th Nome do Evento
                         th Local
@@ -41,7 +41,7 @@ block content
                         th Quantidade de Pessoas
                     tbody
                     tr(ng-repeat="event in todayEventList")
-                        td 
+                        td
                             a(href="", ng-click="showEventInfo(event)") {{event.name}}
                         td {{event.location}}
                         td {{event.startDate}}
@@ -58,7 +58,7 @@ block content
             // NEXT EVENT LIST
             h2 Eventos Futuros
             #eventList
-                table
+                table.table.table-striped.table-hover
                     thead
                         th Nome do Evento
                         th Local
@@ -85,7 +85,7 @@ block content
             // PAST EVENT LIST
             h2 Eventos Passados
             #eventList
-                table
+                table.table.table-striped.table-hover
                     thead
                         th Nome do Evento
                         th Local
@@ -109,18 +109,32 @@ block content
 
             #addEvent(ng-show='showForm==true')
                 h2 Add Event
-                fieldset
-                    input#inputEventName(type='text', placeholder='Nome do evento', ng-model='eventToAdd.name')
-                    input#inputEventLocation(type='text', placeholder='Local', ng-model='eventToAdd.location')
-                    br
-                    input#inputEventStartDate(type='text', placeholder='Data do evento', ng-model='eventToAdd.startDate')
-                    input#inputEventStartTime(type='text', placeholder='Hora de início previsto', ng-model='eventToAdd.startTime')
-                    br
-                    input#inputEventFinishTime(type='text', placeholder='Hora de término previsto', ng-model='eventToAdd.finishTime')
-                    input#inputEventEmail(type='text', placeholder='Email', ng-model='eventToAdd.email')
-                    br
-                    button#btnSendEventRequest(ng-click='sendEventRequest()') Enviar Pedido de Cadastro
-                    span (Sujeito à confirmação)
+                fieldset(style='width:650px')
+                    div.row.form-group
+                        div.col-md-6
+                            input#inputEventName.form-control(type='text', placeholder='Nome do evento', ng-model='eventToAdd.name')
+                        div.col-md-6
+                            input#inputEventLocation.form-control(type='text', placeholder='Local', ng-model='eventToAdd.location')
+                    div.row.form-group
+                        div.col-md-6
+                            div.input-group
+                                input.form-control(uib-datepicker-popup='dd/MM/yyyy', placeholder='Data', datepicker-options='dateOptions' is-open='startDatePopup.opened' ng-model='eventToAdd.startDate')
+                                span.input-group-btn
+                                    button.btn.btn-default(type='button', ng-click='startDatePopup.opened=true')
+                                        i.glyphicon.glyphicon-calendar
+                        div.col-md-6
+                            input#inputEventStartTime.form-control(type='text', placeholder='Hora de início previsto', ng-model='eventToAdd.startTime')
+                    div.row.form-group
+                        div.col-md-6
+                            input#inputEventFinishTime.form-control(type='text', placeholder='Hora de término previsto', ng-model='eventToAdd.finishTime')
+                        div.col-md-6
+                            input#inputEventEmail.form-control(type='text', placeholder='Email', ng-model='eventToAdd.email')
+                    div.row.form-group
+                        div.col-md-12
+                            button#btnSendEventRequest.btn.btn-primary(ng-click='sendEventRequest()') Enviar Pedido de Cadastro
+                    div.row
+                        div.col-md-12
+                            span (Sujeito à confirmação)
 
             // /ADD EVENT
 

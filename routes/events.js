@@ -14,6 +14,46 @@ router.get('/eventlist', function(req, res) {
 		res.json(docs);
 	});
 });
+
+router.get('/eventlist/future', function(req, res) {
+	var db = req.db;
+	var today = new Date().toISOString();
+
+	db.get('eventlist').find(
+		{ 'startDate' : { $gt : today } },
+		{},
+		function(e, docs) {
+			res.json(docs);
+		}
+	);
+});
+
+router.get('/eventlist/past', function(req, res) {
+	var db = req.db;
+	var today = new Date().toISOString();
+
+	db.get('eventlist').find(
+		{ 'startDate' : { $lt : today } },
+		{},
+		function(e, docs) {
+			res.json(docs);
+		}
+	);
+});
+
+router.get('/eventlist/today', function(req, res) {
+	var db = req.db;
+	var today = new Date().toISOString();
+
+	db.get('eventlist').find(
+		{},
+		{},
+		function(e, docs) {
+			res.json(docs);
+		}
+	);
+});
+
 /*
  * POST to add event
  */

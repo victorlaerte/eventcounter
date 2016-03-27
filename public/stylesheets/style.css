@@ -18,7 +18,7 @@ a {
 
 #eventList {
 	margin:0 0 30px 0;
-}
+}/*
 	#eventList table {
 		border-collapse:separate;
 		border-spacing:1px;
@@ -39,7 +39,7 @@ a {
 				background:#FFF;
 				padding:5px 10px;
 				text-align:center;
-			}
+			}*/
 
 #eventInfo {
 	width:250px;

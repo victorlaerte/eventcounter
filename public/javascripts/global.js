@@ -1,4 +1,4 @@
-var app = angular.module('eventCounter', []);
+var app = angular.module('eventCounter', ['ngAnimate', 'ui.bootstrap']);
 
 app.controller('eventCounterCtrl', function($scope, $http) {
 
@@ -10,8 +10,14 @@ app.controller('eventCounterCtrl', function($scope, $http) {
         $scope.nextEventList = [];
         $scope.eventToAdd = {};
         $scope.showForm = false;
+        $scope.dateOptions = {
+            dateDisabled: false,
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(2010),
+            startingDay: 1
+        };
 
-        $http.get('/events/eventlist').then(function(response) {
+        $http.get('/events/eventlist/today').then(function(response) {
 
             //PASS TODAY PARAMETERS
             if (response.status == 200) {
@@ -21,7 +27,7 @@ app.controller('eventCounterCtrl', function($scope, $http) {
 
         });
 
-        $http.get('/events/eventlist').then(function(response) {
+        $http.get('/events/eventlist/future').then(function(response) {
 
             //PASS FUTURE PARAMETERS
             if (response.status == 200) {
@@ -29,7 +35,7 @@ app.controller('eventCounterCtrl', function($scope, $http) {
             }
         });
 
-        $http.get('/events/eventlist').then(function(response) {
+        $http.get('/events/eventlist/past').then(function(response) {
 
             //PASS PAST PARMETERS
             if (response.status == 200) {
