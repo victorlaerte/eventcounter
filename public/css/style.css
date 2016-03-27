@@ -1,0 +1,24 @@
+body {
+  padding: 30px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+	margin:0 0 .5em 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#eventInfo {
+	width:250px;
+	position:absolute;
+	top:0; left:0;
+}
+
+#eventInfo p {
+	padding:15px;
+	border:1px solid #CCC;
+	background:rgba(80,120,255,0.05);
+}

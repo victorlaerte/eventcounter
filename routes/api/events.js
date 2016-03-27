@@ -1,29 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-/*
- * GET eventList
- */
-router.get('/eventlist', function(req, res) {
-
+router.get('/future', function(req, res) {
 	var db = req.db;
-	var collection = db.get('eventlist');
-
-	//TODO: if admin return all, if not admin return only checked true
-	collection.find({}, {}, function(e, docs) {
-		res.json(docs);
-	});
-});
-
-router.get('/eventlist/future', function(req, res) {
-	var db = req.db;
+    var collection = db.get('eventlist');
 	var today = new Date();
 
 	today.setHours(23,59,59,999);
-	today = today.toISOString();
 
-	db.get('eventlist').find(
-		{ 'startDate' : { $gt : today } },
+	collection.find(
+		{ 'startDate' : { $gt : today.toISOString() } },
 		{ 'sort' : { 'startDate' : 1 } },
 		function(e, docs) {
 			res.json(docs);
@@ -31,15 +17,15 @@ router.get('/eventlist/future', function(req, res) {
 	);
 });
 
-router.get('/eventlist/past', function(req, res) {
+router.get('/past', function(req, res) {
 	var db = req.db;
+    var collection = db.get('eventlist');
 	var today = new Date();
 
 	today.setHours(0,0,0,0);
-	today = today.toISOString();
 
-	db.get('eventlist').find(
-		{ 'startDate' : { $lt : today } },
+	collection.find(
+		{ 'startDate' : { $lt : today.toISOString() } },
 		{ 'sort' : { 'startDate' : 1 } },
 		function(e, docs) {
 			res.json(docs);
@@ -47,22 +33,20 @@ router.get('/eventlist/past', function(req, res) {
 	);
 });
 
-router.get('/eventlist/today', function(req, res) {
+router.get('/today', function(req, res) {
 	var db = req.db;
+    var collection = db.get('eventlist');
 	var begin = new Date();
 	var end = new Date();
 
 	begin.setHours(0,0,0,0);
 	end.setHours(23,59,59,999);
 
-	begin = begin.toISOString();
-	end = end.toISOString();
-
-	db.get('eventlist').find(
+	collection.find(
 		{
 			'startDate' : {
-				$gte : begin,
-				$lte : end
+				$gte : begin.toISOString(),
+				$lte : end.toISOString()
 			}
 		},
 		{ 'sort' : { 'startDate' : 1 } },
@@ -72,12 +56,16 @@ router.get('/eventlist/today', function(req, res) {
 	);
 });
 
-/*
- * POST to add event
- */
+router.get('/:eventId', function(req, res) {
+	var db = req.db;
+	var collection = db.get('eventlist');
 
-router.post('/addevent', function(req, res) {
+    collection.findById(req.params.eventId, function(e, doc) {
+		res.json(doc);
+	});
+});
 
+router.post('/', function(req, res) {
 	var db = req.db;
 	var collection = db.get('eventlist');
 
@@ -97,8 +85,6 @@ router.post('/addevent', function(req, res) {
 			}
 		);
 	});
-
 });
-
 
 module.exports = router;

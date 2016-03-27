@@ -1,0 +1,80 @@
+
+div
+    // Wrapper
+    #wrapper
+
+        // CURRENT EVENT LIST
+        h2 Eventos Hoje
+        #eventList
+            table.table.table-striped.table-hover
+                thead
+                    th Nome do Evento
+                    th Local
+                    th Data
+                    th Hora
+                    th Quantidade de Pessoas
+                tbody
+                tr(ng-repeat="event in todayEventList")
+                    td
+                        a(ng-href="#/event/{{event._id}}") {{event.name}}
+                    td {{event.location}}
+                    td {{event.startDate | date:'dd/MM/yyyy'}}
+                    td {{event.startTime}}
+                    td {{event.counter}}
+
+        // /CURRENT EVENT LIST
+
+    // /WRAPPER
+
+    // Wrapper
+    #wrapper
+
+        // NEXT EVENT LIST
+        h2 Eventos Futuros
+        #eventList
+            table.table.table-striped.table-hover
+                thead
+                    th Nome do Evento
+                    th Local
+                    th Data
+                    th Hora
+                    th Quantidade de Pessoas
+                tbody
+                tr(ng-repeat="event in nextEventList")
+                    td
+                        a(ng-href="#/event/{{event._id}}") {{event.name}}
+                    td {{event.location}}
+                    td {{event.startDate | date:'dd/MM/yyyy'}}
+                    td {{event.startTime}}
+                    td {{event.counter}}
+
+        // /NEXT EVENT LIST
+
+    // /WRAPPER
+
+
+    // Wrapper
+    #wrapper
+        // PAST EVENT LIST
+        h2 Eventos Passados
+        #eventList
+            table.table.table-striped.table-hover
+                thead
+                    th Nome do Evento
+                    th Local
+                    th Data
+                    th Hora
+                    th Quantidade de Pessoas
+                tbody
+                tr(ng-repeat="event in pastEventList")
+                    td
+                        a(ng-href="#/event/{{event._id}}") {{event.name}}
+                    td {{event.location}}
+                    td {{event.startDate | date:'dd/MM/yyyy'}}
+                    td {{event.startTime}}
+                    td {{event.counter}}
+
+        // /PAST EVENT LIST
+
+        a.btn.btn-primary(href='#/event-form') Adicionar Evento
+    // /WRAPPER

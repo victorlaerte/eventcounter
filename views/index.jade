@@ -1,141 +1,16 @@
-extends layout
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/bower_components/angular/angular-csp.css')
+    link(rel='stylesheet', href='/bower_components/angular-bootstrap/ui-bootstrap-csp.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+  body(ng-app="eventCounter")
+    div(ng-view)
 
-block content
-    h1= title
-    p Bem Vindo ao Event Counter
-
-    div(ng-controller="eventCounterCtrl")
-
-        // Wrapper
-        #wrapper
-
-            // EVENT INFO
-            #eventInfo(ng-hide="selectedEvent === undefined")
-                hide Event Info
-                p
-                    strong Nome:
-                    |  <span>{{selectedEvent.name}}</span>
-                    br
-                    strong Local:
-                    |  <span>{{selectedEvent.location}}</span>
-                    br
-                    strong Data:
-                    |  <span>{{selectedEvent.startDate | date:'dd/MM/yyyy'}}</span>
-                    br
-                    strong Hora:
-                    |  <span>{{selectedEvent.startTime}}</span>
-                    br
-                    strong Quantidade de Pessoas:
-                    |  <span>{{selectedEvent.counter}}</span>
-            // /EVENT INFO
-
-            // CURRENT EVENT LIST
-            h2 Eventos Hoje
-            #eventList
-                table.table.table-striped.table-hover
-                    thead
-                        th Nome do Evento
-                        th Local
-                        th Data
-                        th Hora
-                        th Quantidade de Pessoas
-                    tbody
-                    tr(ng-repeat="event in todayEventList")
-                        td
-                            a(href="", ng-click="showEventInfo(event)") {{event.name}}
-                        td {{event.location}}
-                        td {{event.startDate | date:'dd/MM/yyyy'}}
-                        td {{event.startTime}}
-                        td {{event.counter}}
-
-            // /CURRENT EVENT LIST
-
-        // /WRAPPER
-
-        // Wrapper
-        #wrapper
-
-            // NEXT EVENT LIST
-            h2 Eventos Futuros
-            #eventList
-                table.table.table-striped.table-hover
-                    thead
-                        th Nome do Evento
-                        th Local
-                        th Data
-                        th Hora
-                        th Quantidade de Pessoas
-                    tbody
-                    tr(ng-repeat="event in nextEventList")
-                        td
-                            a(href="", ng-click="showEventInfo(event)") {{event.name}}
-                        td {{event.location}}
-                        td {{event.startDate | date:'dd/MM/yyyy'}}
-                        td {{event.startTime}}
-                        td {{event.counter}}
-
-            // /NEXT EVENT LIST
-
-        // /WRAPPER
-
-
-        // Wrapper
-        #wrapper
-
-            // PAST EVENT LIST
-            h2 Eventos Passados
-            #eventList
-                table.table.table-striped.table-hover
-                    thead
-                        th Nome do Evento
-                        th Local
-                        th Data
-                        th Hora
-                        th Quantidade de Pessoas
-                    tbody
-                    tr(ng-repeat="event in pastEventList")
-                        td
-                            a(href="",ng-click="showEventInfo(event)") {{event.name}}
-                        td {{event.location}}
-                        td {{event.startDate | date:'dd/MM/yyyy'}}
-                        td {{event.startTime}}
-                        td {{event.counter}}
-
-            // /PAST EVENT LIST
-
-            button#btnAddEvent(ng-init='showForm=false', ng-click='showForm=!showForm') Adicionar Evento
-
-            // ADD EVENT
-
-            #addEvent(ng-show='showForm==true')
-                h2 Add Event
-                fieldset(style='width:650px')
-                    div.row.form-group
-                        div.col-md-6
-                            input#inputEventName.form-control(type='text', placeholder='Nome do evento', ng-model='eventToAdd.name')
-                        div.col-md-6
-                            input#inputEventLocation.form-control(type='text', placeholder='Local', ng-model='eventToAdd.location')
-                    div.row.form-group
-                        div.col-md-6
-                            div.input-group
-                                input.form-control(uib-datepicker-popup='dd/MM/yyyy', placeholder='Data', datepicker-options='dateOptions' is-open='startDatePopup.opened' ng-model='eventToAdd.startDate')
-                                span.input-group-btn
-                                    button.btn.btn-default(type='button', ng-click='startDatePopup.opened=true')
-                                        i.glyphicon.glyphicon-calendar
-                        div.col-md-6
-                            input#inputEventStartTime.form-control(type='text', placeholder='Hora de início previsto', ng-model='eventToAdd.startTime')
-                    div.row.form-group
-                        div.col-md-6
-                            input#inputEventFinishTime.form-control(type='text', placeholder='Hora de término previsto', ng-model='eventToAdd.finishTime')
-                        div.col-md-6
-                            input#inputEventEmail.form-control(type='text', placeholder='Email', ng-model='eventToAdd.email')
-                    div.row.form-group
-                        div.col-md-12
-                            button#btnSendEventRequest.btn.btn-primary(ng-click='sendEventRequest()') Enviar Pedido de Cadastro
-                    div.row
-                        div.col-md-12
-                            span (Sujeito à confirmação)
-
-            // /ADD EVENT
-
-        // /WRAPPER
+    script(src='/bower_components/angular/angular.min.js')
+    script(src='/bower_components/angular-animate/angular-animate.min.js')
+    script(src='/bower_components/angular-route/angular-route.min.js')
+    script(src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')
+    script(src='/js/app.js')

@@ -1,0 +1,16 @@
+div#eventInfo
+    p
+        strong Nome:
+        |  <span>{{event.name}}</span>
+        br
+        strong Local:
+        |  <span>{{event.location}}</span>
+        br
+        strong Data:
+        |  <span>{{event.startDate | date:'dd/MM/yyyy'}}</span>
+        br
+        strong Hora:
+        |  <span>{{event.startTime}}</span>
+        br
+        strong Quantidade de Pessoas:
+        |  <span>{{event.counter}}</span>

@@ -1,0 +1,29 @@
+
+#addEvent
+    h2 Add Event
+    fieldset(style='max-width:650px')
+        div.row
+            div.col-sm-6
+                input#inputEventName.form-control.form-group(type='text', placeholder='Nome do evento', ng-model='eventToAdd.name')
+            div.col-sm-6
+                input#inputEventLocation.form-control.form-group(type='text', placeholder='Local', ng-model='eventToAdd.location')
+        div.row
+            div.col-sm-6
+                div.input-group.form-group
+                    input.form-control(uib-datepicker-popup='dd/MM/yyyy', placeholder='Data', datepicker-options='dateOptions' is-open='startDatePopup.opened' ng-model='eventToAdd.startDate')
+                    span.input-group-btn
+                        button.btn.btn-default(type='button', ng-click='startDatePopup.opened=true')
+                            i.glyphicon.glyphicon-calendar
+            div.col-sm-6
+                input#inputEventStartTime.form-control.form-group(type='text', placeholder='Hora de início previsto', ng-model='eventToAdd.startTime')
+        div.row
+            div.col-sm-6
+                input#inputEventFinishTime.form-control.form-group(type='text', placeholder='Hora de término previsto', ng-model='eventToAdd.finishTime')
+            div.col-sm-6
+                input#inputEventEmail.form-control.form-group(type='text', placeholder='Email', ng-model='eventToAdd.email')
+        div.row.form-group
+            div.col-sm-12
+                button#btnSendEventRequest.btn.btn-primary(ng-click='sendEventRequest()') Enviar Pedido de Cadastro
+        div.row
+            div.col-sm-12
+                p (Sujeito à confirmação)
