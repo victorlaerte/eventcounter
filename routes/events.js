@@ -24,7 +24,7 @@ router.get('/eventlist/future', function(req, res) {
 
 	db.get('eventlist').find(
 		{ 'startDate' : { $gt : today } },
-		{},
+		{ 'sort' : { 'startDate' : 1 } },
 		function(e, docs) {
 			res.json(docs);
 		}
@@ -40,7 +40,7 @@ router.get('/eventlist/past', function(req, res) {
 
 	db.get('eventlist').find(
 		{ 'startDate' : { $lt : today } },
-		{},
+		{ 'sort' : { 'startDate' : 1 } },
 		function(e, docs) {
 			res.json(docs);
 		}
@@ -65,7 +65,7 @@ router.get('/eventlist/today', function(req, res) {
 				$lte : end
 			}
 		},
-		{},
+		{ 'sort' : { 'startDate' : 1 } },
 		function(e, docs) {
 			res.json(docs);
 		}
