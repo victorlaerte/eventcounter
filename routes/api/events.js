@@ -65,6 +65,11 @@ router.get('/:eventId', function(req, res) {
 	});
 });
 
+router.post('/:eventId/checkin', function(req, res) {
+	console.log('dados do checkin', req.body);
+	res.send();
+});
+
 router.post('/', function(req, res) {
 	var db = req.db;
 	var collection = db.get('eventlist');

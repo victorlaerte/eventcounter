@@ -28,9 +28,29 @@
         });
     };
 
-    var ShowEventCtrl = function($scope, $http, $routeParams) {
+    var ShowEventCtrl = function($scope, $http, $routeParams, $window) {
         $http.get('/api/events/' + $routeParams.eventId).success(function(event) {
             $scope.event = event;
+            $scope.hasGeolocation = !!$window.navigator.geolocation;
+
+            $scope.doCheckin = function() {
+                $window.navigator.geolocation.getCurrentPosition(function(position) {
+                    var url = '/api/events/' + $routeParams.eventId + '/checkin';
+                    var data = {
+                        coords : {
+                            latitude : position.coords.latitude,
+                            longitude : position.coords.longitude,
+                            accuracy : position.coords.accuracy
+                        }
+                    };
+
+                    $http.post(url, data).success(function() {
+                        alert('Check-in realizado com sucesso!');
+                    }).error(function() {
+                        alert('Houve uma falha durante o check-in, tente novamente em alguns instantes.');
+                    });
+                });
+            };
         });
     };
 
@@ -68,7 +88,7 @@
     angular.module('eventCounter', ['ngAnimate', 'ngRoute', 'ui.bootstrap'])
         .config(['$routeProvider', Config])
         .controller('HomeCtrl', ['$scope', '$http', HomeCtrl])
-        .controller('ShowEventCtrl', ['$scope', '$http', '$routeParams', ShowEventCtrl])
+        .controller('ShowEventCtrl', ['$scope', '$http', '$routeParams', '$window', ShowEventCtrl])
         .controller('AddEventCtrl', ['$scope', '$http', '$location', AddEventCtrl])
         .directive('eventDatatable', EventDatatableDirective)
     ;

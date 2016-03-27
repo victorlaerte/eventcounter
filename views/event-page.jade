@@ -14,3 +14,5 @@ div#eventInfo
         br
         strong Quantidade de Pessoas:
         |  <span>{{event.counter}}</span>
+
+    button.btn.btn-primary(ng-click='doCheckin()', ng-show='hasGeolocation') Fazer check-in
