@@ -5,7 +5,9 @@ table.table.table-striped.table-hover
         th Nome do Evento
         th Local
         th Data
-        th Hora
+        th Começa às
+        th Termina às
+        th Organizador
         th Quantidade de Pessoas
     tbody
     tr(ng-repeat="event in events")
@@ -13,5 +15,9 @@ table.table.table-striped.table-hover
             a(ng-href="#/event/{{event._id}}") {{event.name}}
         td {{event.location}}
         td {{event.startDate | date:'dd/MM/yyyy'}}
-        td {{event.startTime}}
+        td {{event.startTime | date:'HH:mm'}}
+        td {{event.finishTime | date:'HH:mm'}}
+        td
+            span {{event.responsible.name}}
+            span(ng-show='{{event.responsible.email}}') &nbsp;&lt;{{event.responsible.email}}&gt;
         td {{event.counter}}
