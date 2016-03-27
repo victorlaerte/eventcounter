@@ -17,7 +17,10 @@ router.get('/eventlist', function(req, res) {
 
 router.get('/eventlist/future', function(req, res) {
 	var db = req.db;
-	var today = new Date().toISOString();
+	var today = new Date();
+
+	today.setHours(23,59,59,999);
+	today = today.toISOString();
 
 	db.get('eventlist').find(
 		{ 'startDate' : { $gt : today } },
@@ -30,7 +33,10 @@ router.get('/eventlist/future', function(req, res) {
 
 router.get('/eventlist/past', function(req, res) {
 	var db = req.db;
-	var today = new Date().toISOString();
+	var today = new Date();
+
+	today.setHours(0,0,0,0);
+	today = today.toISOString();
 
 	db.get('eventlist').find(
 		{ 'startDate' : { $lt : today } },
@@ -43,10 +49,22 @@ router.get('/eventlist/past', function(req, res) {
 
 router.get('/eventlist/today', function(req, res) {
 	var db = req.db;
-	var today = new Date().toISOString();
+	var begin = new Date();
+	var end = new Date();
+
+	begin.setHours(0,0,0,0);
+	end.setHours(23,59,59,999);
+
+	begin = begin.toISOString();
+	end = end.toISOString();
 
 	db.get('eventlist').find(
-		{},
+		{
+			'startDate' : {
+				$gte : begin,
+				$lte : end
+			}
+		},
 		{},
 		function(e, docs) {
 			res.json(docs);
