@@ -20,7 +20,7 @@ block content
                     |  <span>{{selectedEvent.location}}</span>
                     br
                     strong Data:
-                    |  <span>{{selectedEvent.startDate}}</span>
+                    |  <span>{{selectedEvent.startDate | date:'dd/MM/yyyy'}}</span>
                     br
                     strong Hora:
                     |  <span>{{selectedEvent.startTime}}</span>
@@ -44,7 +44,7 @@ block content
                         td
                             a(href="", ng-click="showEventInfo(event)") {{event.name}}
                         td {{event.location}}
-                        td {{event.startDate}}
+                        td {{event.startDate | date:'dd/MM/yyyy'}}
                         td {{event.startTime}}
                         td {{event.counter}}
 
@@ -70,7 +70,7 @@ block content
                         td
                             a(href="", ng-click="showEventInfo(event)") {{event.name}}
                         td {{event.location}}
-                        td {{event.startDate}}
+                        td {{event.startDate | date:'dd/MM/yyyy'}}
                         td {{event.startTime}}
                         td {{event.counter}}
 
@@ -97,7 +97,7 @@ block content
                         td
                             a(href="",ng-click="showEventInfo(event)") {{event.name}}
                         td {{event.location}}
-                        td {{event.startDate}}
+                        td {{event.startDate | date:'dd/MM/yyyy'}}
                         td {{event.startTime}}
                         td {{event.counter}}
 
