@@ -4,10 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//Database
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/eventcounter');
+
+//Configuring Passport
+var passport = require('passport');
+var expressSession = require('express-session');
 
 var routes = require('./routes/index');
 var partials = require('./routes/partials');
@@ -15,6 +15,11 @@ var directives = require('./routes/directives');
 var events = require('./routes/api/events');
 
 var app = express();
+
+//Passport
+app.use(expressSession({secret: 'secretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,12 +32,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(function(req, res, next){
-  //Adding db to each request, review this code.
-  req.db = db;
-  next();
-});
 
 app.use('/', routes);
 app.use('/partials', partials);
